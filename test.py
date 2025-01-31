@@ -17,7 +17,7 @@ def get_power_schemes():
 
         temp = temp.split("  ")
         temp_guid = temp[0].replace("Power Scheme GUID: ", "")
-        temp_scheme_name = temp[1].replace("(", "").replace(")\r", "")
+        temp_scheme_name = temp[1].replace("(", "").replace(")", "").replace(")\r", "")
         
         # temp_guid = temp[3]  # Split each item into a sub-list, "3" being the GUID of the scheme in each iterative item.
         # temp_plan_name = ""  # This line is intended to get the power plan's name.
@@ -32,13 +32,24 @@ def get_power_schemes():
 def prettify_power_schemes():
     schemes = get_power_schemes()
 
-    
+    option = 1
+    for i in schemes:
+        print(f"{option}.", i[0])
+        option += 1
 
-    print(schemes)
+def set_active_plan(choice):
+    schemes = get_power_schemes()
 
+    # The four lines below could easily be shrunken down into a single line, but I felt that four separate lines would be more comprehensible.
+    choice = choice - 1  # Since lists start at zero, we subtract 1 from our input.
+    argument = schemes[choice][1]  # Selects the second item in the list, which is the GUID of the power plan.
+    command = f"powercfg /SETACTIVE {argument}"  # The whole construction of the command.
+    subprocess.run(command)  # Runs the command.
 
 while True:
     prettify_power_schemes()
 
-    input("Press Enter to continue...")
+    choice = int(input("\nSelection an option: "))
+
+    set_active_plan(choice)
 
