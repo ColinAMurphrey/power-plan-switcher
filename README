@@ -1,0 +1,6 @@
+The following program was made using Python 3.10.11. If you don't have that install, do not contact me first. Download it from the link below and install it:
+https://www.python.org/downloads/release/python-31011/
+
+This is a simple CLI-based Python program that gets the GUIDs and names of your Windows installation's Power Plans. Why did I make this? It's much quicker than going all the way through several Control Panel menus.
+
+Simply launch the main.py and select whichever power plan you would like to use.
